@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
   <meta name="theme-color" content="#0b1020"><meta name="description" content="Офлайн спидометр и трекер поездок">
-  <link rel="manifest" href="manifest.json"><link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.json"><link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="map.css">
   <title>Спидометр и поездки</title>
 </head>
 <body>
@@ -12,6 +12,7 @@
     <section class="screen active" id="screen-drive">
       <div class="drive-head"><label for="driveVehicle">Машина</label><select id="driveVehicle"></select><span id="driveStatus" class="status">Готов к поездке</span></div>
       <div class="speed-wrap"><div class="speed-value" id="speedValue">0</div><div class="speed-unit">км/ч</div><div class="speed-meta"><span>МАКС <b id="maxSpeed">0</b></span><span>СРЕДНЯЯ <b id="avgSpeed">0</b></span></div></div>
+      <div class="map-heading"><strong>Карта маршрута</strong><span id="mapNetwork">Карта загружается из интернета</span></div><div id="liveMap" class="mapbox"><canvas></canvas><span class="map-empty">Маршрут появится после получения GPS</span><small>© OpenStreetMap contributors</small></div>
       <div class="metrics-grid"><article><span>ВРЕМЯ</span><b id="elapsed">00:00</b></article><article><span>ДИСТАНЦИЯ</span><b><i id="distance">0.00</i> км</b></article><article><span>ТОПЛИВО</span><b><i id="fuel">0.00</i> л</b></article><article><span>ЭКО-РЕЙТИНГ</span><b id="eco">100</b></article></div>
       <div class="drive-actions"><button id="startBtn" class="primary">▶ Старт</button><button id="stopBtn" class="danger" disabled>■ Стоп</button><button id="resetBtn" class="secondary">↺ Сброс</button></div><button id="hudBtn" class="hud-toggle">HUD режим</button>
       <p class="hint">Для точного трека разрешите доступ к геопозиции и держите приложение открытым.</p>
