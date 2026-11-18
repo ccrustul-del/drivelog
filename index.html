@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta name="theme-color" content="#0b1020"><meta name="description" content="Офлайн спидометр и трекер поездок">
+  <link rel="manifest" href="manifest.json"><link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css">
+  <title>Спидометр и поездки</title>
+</head>
+<body>
+  <header class="topbar"><div><strong>DRIVELOG</strong><span id="connection">Локальный режим</span></div><button id="installBtn" class="icon-button" hidden aria-label="Установить">⬇</button></header>
+  <main id="appMain">
+    <section class="screen active" id="screen-drive">
+      <div class="drive-head"><label for="driveVehicle">Машина</label><select id="driveVehicle"></select><span id="driveStatus" class="status">Готов к поездке</span></div>
+      <div class="speed-wrap"><div class="speed-value" id="speedValue">0</div><div class="speed-unit">км/ч</div><div class="speed-meta"><span>МАКС <b id="maxSpeed">0</b></span><span>СРЕДНЯЯ <b id="avgSpeed">0</b></span></div></div>
+      <div class="metrics-grid"><article><span>ВРЕМЯ</span><b id="elapsed">00:00</b></article><article><span>ДИСТАНЦИЯ</span><b><i id="distance">0.00</i> км</b></article><article><span>ТОПЛИВО</span><b><i id="fuel">0.00</i> л</b></article><article><span>ЭКО-РЕЙТИНГ</span><b id="eco">100</b></article></div>
+      <div class="drive-actions"><button id="startBtn" class="primary">▶ Старт</button><button id="stopBtn" class="danger" disabled>■ Стоп</button><button id="resetBtn" class="secondary">↺ Сброс</button></div><button id="hudBtn" class="hud-toggle">HUD режим</button>
+      <p class="hint">Для точного трека разрешите доступ к геопозиции и держите приложение открытым.</p>
+    </section>
+    <section class="screen" id="screen-history"><div class="section-head"><div><h1>История</h1><p>Ваши поездки и статистика</p></div><select id="historyFilter"></select></div><div class="summary-grid"><article><span>ПРОБЕГ</span><b id="sumDistance">0 км</b></article><article><span>ВРЕМЯ</span><b id="sumTime">0 ч</b></article><article><span>ТОПЛИВО</span><b id="sumFuel">0 л</b></article></div><div id="tripList" class="card-list"></div></section>
+    <section class="screen" id="screen-cars"><div class="section-head"><div><h1>Машины</h1><p>Обслуживание и расход</p></div><button id="addVehicleBtn" class="primary small">＋ Добавить</button></div><div id="vehicleList" class="card-list"></div></section>
+    <section class="screen" id="screen-firebase"><div class="section-head"><h1>Firebase</h1><p>Необязательная синхронизация между устройствами</p></div><div class="panel"><label>Конфигурация Firebase</label><textarea id="firebaseConfig" rows="9" placeholder="{&#10;  &quot;apiKey&quot;: &quot;...&quot;,&#10;  &quot;authDomain&quot;: &quot;...&quot;,&#10;  &quot;projectId&quot;: &quot;...&quot;,&#10;  &quot;appId&quot;: &quot;...&quot;&#10;}"></textarea><p class="hint">Вставьте объект firebaseConfig из настроек проекта Firebase. Для Firestore настройте правила доступа.</p><div class="row"><button id="connectFirebase" class="primary">Сохранить и подключить</button><button id="disconnectFirebase" class="secondary">Отключить</button></div><p id="firebaseStatus" class="hint"></p></div></section>
+    <section class="screen" id="screen-settings"><div class="section-head"><h1>Настройки</h1></div><div class="panel"><label for="fuelPrice">Цена бензина за литр</label><input id="fuelPrice" type="number" min="0" step="0.01" placeholder="0"><button id="saveSettings" class="primary">Сохранить</button></div><div class="panel"><h2>Уведомления</h2><p class="hint">Напоминания о ТО показываются при открытом приложении. На iPhone установите PWA на экран «Домой».</p><button id="notifyBtn" class="secondary">Разрешить уведомления</button><p id="notifyStatus" class="hint"></p></div><div class="panel"><h2>Данные</h2><div class="row"><button id="exportBtn" class="secondary">Экспорт JSON</button><label class="file-button secondary">Импорт JSON<input id="importFile" type="file" accept="application/json,.json" hidden></label></div></div><div class="panel"><h2>Сброс данных</h2><p class="hint">Удаляет машины, настройки и сохранённые поездки.</p><button id="clearBtn" class="danger">Очистить все данные</button></div></section>
+  </main>
+  <nav class="tabbar"><button class="tab active" data-screen="drive"><span>🚗</span>Поездка</button><button class="tab" data-screen="history"><span>📊</span>История</button><button class="tab" data-screen="cars"><span>🚙</span>Машины</button><button class="tab" data-screen="firebase"><span>☁️</span>Firebase</button><button class="tab" data-screen="settings"><span>⚙️</span>Настройки</button></nav>
+  <div id="modal" class="modal" hidden><div class="modal-card"><button id="modalClose" class="modal-close" aria-label="Закрыть">×</button><div id="modalBody"></div></div></div>
+  <div id="toast" class="toast" role="status"></div>
+  <script type="module" src="app.js"></script>
+</body></html>
